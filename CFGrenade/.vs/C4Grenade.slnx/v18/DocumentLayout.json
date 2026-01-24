@@ -1,0 +1,113 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\JUICE\\Documents\\SCP plugins\\C4Grenade\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{026CAE90-A489-422B-B530-37DE05D136EC}|C4Grenade\\C4Grenade.csproj|C:\\Users\\JUICE\\Documents\\SCP plugins\\C4Grenade\\c4grenade\\customc4grenade\\collisiondetect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{026CAE90-A489-422B-B530-37DE05D136EC}|C4Grenade\\C4Grenade.csproj|solutionrelative:c4grenade\\customc4grenade\\collisiondetect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{026CAE90-A489-422B-B530-37DE05D136EC}|C4Grenade\\C4Grenade.csproj|c:\\users\\juice\\documents\\scp plugins\\c4grenade\\c4grenade\\customc4grenade\\c4stablefollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{026CAE90-A489-422B-B530-37DE05D136EC}|C4Grenade\\C4Grenade.csproj|solutionrelative:c4grenade\\customc4grenade\\c4stablefollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{026CAE90-A489-422B-B530-37DE05D136EC}|C4Grenade\\C4Grenade.csproj|C:\\Users\\JUICE\\Documents\\SCP plugins\\C4Grenade\\c4grenade\\customc4grenade\\c4radio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{026CAE90-A489-422B-B530-37DE05D136EC}|C4Grenade\\C4Grenade.csproj|solutionrelative:c4grenade\\customc4grenade\\c4radio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{026CAE90-A489-422B-B530-37DE05D136EC}|C4Grenade\\C4Grenade.csproj|C:\\Users\\JUICE\\Documents\\SCP plugins\\C4Grenade\\c4grenade\\mainplugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{026CAE90-A489-422B-B530-37DE05D136EC}|C4Grenade\\C4Grenade.csproj|solutionrelative:c4grenade\\mainplugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{026CAE90-A489-422B-B530-37DE05D136EC}|C4Grenade\\C4Grenade.csproj|C:\\Users\\JUICE\\Documents\\SCP plugins\\C4Grenade\\c4grenade\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{026CAE90-A489-422B-B530-37DE05D136EC}|C4Grenade\\C4Grenade.csproj|solutionrelative:c4grenade\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "C4StableFollow.cs",
+              "DocumentMoniker": "C:\\Users\\JUICE\\Documents\\SCP plugins\\C4Grenade\\C4Grenade\\CustomC4grenade\\C4StableFollow.cs",
+              "RelativeDocumentMoniker": "C4Grenade\\CustomC4grenade\\C4StableFollow.cs",
+              "ToolTip": "C:\\Users\\JUICE\\Documents\\SCP plugins\\C4Grenade\\C4Grenade\\CustomC4grenade\\C4StableFollow.cs",
+              "RelativeToolTip": "C4Grenade\\CustomC4grenade\\C4StableFollow.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAYwC4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-17T00:53:27.125Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CollisionDetect.cs",
+              "DocumentMoniker": "C:\\Users\\JUICE\\Documents\\SCP plugins\\C4Grenade\\C4Grenade\\CustomC4grenade\\CollisionDetect.cs",
+              "RelativeDocumentMoniker": "C4Grenade\\CustomC4grenade\\CollisionDetect.cs",
+              "ToolTip": "C:\\Users\\JUICE\\Documents\\SCP plugins\\C4Grenade\\C4Grenade\\CustomC4grenade\\CollisionDetect.cs",
+              "RelativeToolTip": "C4Grenade\\CustomC4grenade\\CollisionDetect.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-16T23:02:04.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "C4radio.cs",
+              "DocumentMoniker": "C:\\Users\\JUICE\\Documents\\SCP plugins\\C4Grenade\\C4Grenade\\CustomC4grenade\\C4radio.cs",
+              "RelativeDocumentMoniker": "C4Grenade\\CustomC4grenade\\C4radio.cs",
+              "ToolTip": "C:\\Users\\JUICE\\Documents\\SCP plugins\\C4Grenade\\C4Grenade\\CustomC4grenade\\C4radio.cs",
+              "RelativeToolTip": "C4Grenade\\CustomC4grenade\\C4radio.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAkwGgAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-15T21:50:14.103Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Config.cs",
+              "DocumentMoniker": "C:\\Users\\JUICE\\Documents\\SCP plugins\\C4Grenade\\C4Grenade\\Config.cs",
+              "RelativeDocumentMoniker": "C4Grenade\\Config.cs",
+              "ToolTip": "C:\\Users\\JUICE\\Documents\\SCP plugins\\C4Grenade\\C4Grenade\\Config.cs",
+              "RelativeToolTip": "C4Grenade\\Config.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-15T21:50:14.109Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainPlugin.cs",
+              "DocumentMoniker": "C:\\Users\\JUICE\\Documents\\SCP plugins\\C4Grenade\\C4Grenade\\MainPlugin.cs",
+              "RelativeDocumentMoniker": "C4Grenade\\MainPlugin.cs",
+              "ToolTip": "C:\\Users\\JUICE\\Documents\\SCP plugins\\C4Grenade\\C4Grenade\\MainPlugin.cs",
+              "RelativeToolTip": "C4Grenade\\MainPlugin.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAQwBQAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-15T21:50:14.109Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
