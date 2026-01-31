@@ -19,7 +19,7 @@ public class MainPlugin : Plugin<Config>
     public override string Name => "CF_Detonator";
     public override string Prefix => "CFGrenade";
     public override string Author => "JUICE";
-    public override Version Version => new(1, 3, 23);
+    public override Version Version => new(0, 4, 0);
     public string schematicName = "CFHealth";
     public override void OnEnabled()
     {
@@ -48,6 +48,8 @@ public class MainPlugin : Plugin<Config>
         AudioClipStorage.LoadClip(path2, "bombCollision");
         string path3 = SetupSoundFile("activated.ogg");
         AudioClipStorage.LoadClip(path3, "activated");
+        string path4 = SetupSoundFile("beeping.ogg");
+        AudioClipStorage.LoadClip(path4, "beeping");
     }
     public string SetupSoundFile(string filename)
     {
@@ -92,13 +94,13 @@ public class MainPlugin : Plugin<Config>
         if (!Directory.Exists(specificFolder))
         {
             Directory.CreateDirectory(specificFolder);
-            Log.Info($"[CFGrenade] Created ProjectMER directory: {specificFolder}");
+            Log.Info($"Created ProjectMER directory: {specificFolder}");
         }
         
         if (!File.Exists(destinationPath))
         {
             SaveResource($"{schematicName}.json", destinationPath);
-            Log.Info($"[CFGrenade] Saved schematic to LabAPI folder: {destinationPath}");
+            Log.Info($"Saved schematic to LabAPI folder: {destinationPath}");
         }
     }
     private void SaveResource(string fileName, string savePath)
@@ -110,7 +112,7 @@ public class MainPlugin : Plugin<Config>
 
         if (resourceName == null)
         {
-            Log.Error($"[SaveResource] Could not find embedded resource: '{fileName}'.");
+            Log.Error($"Could not find embedded resource: '{fileName}'.");
             return;
         }
         

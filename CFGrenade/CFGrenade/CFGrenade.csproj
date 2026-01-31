@@ -7,7 +7,7 @@
     <ProjectGuid>{026CAE90-A489-422B-B530-37DE05D136EC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>C4Grenade</RootNamespace>
+    <RootNamespace>CFGrenade</RootNamespace>
     <AssemblyName>CFGrenade</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <langversion>latest</langversion>
@@ -125,7 +125,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomC4grenade\C4radio.cs" />
-    <Compile Include="CustomC4grenade\C4StableFollow.cs" />
     <Compile Include="CustomC4grenade\CollisionDetect.cs" />
     <Compile Include="MainPlugin.cs" />
     <Compile Include="Config.cs" />
@@ -146,6 +145,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CustomC4grenade\CFHealth.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CustomC4grenade\beeping.ogg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
