@@ -29,21 +29,13 @@ namespace С4grenade.CustomC4grenade;
 internal class C4radio : CustomItem
 {
     public override uint Id { get; set; } = 108;
-    public override string Name { get; set; } = "<i><color=black>C4-Detonator</i></color>";
+    public override string Name { get; set; } = "<i><color=black>C4 Детонатор</i></color>";
     public override string Description { get; set; } = "<size=0>...</size=0>";
     public override ItemType Type { get; set; } = ItemType.Radio;
     public override float Weight { get; set; } = 3f;
     public override SpawnProperties SpawnProperties { get; set; } = new()
     {
-        Limit = 1,
-        RoleSpawnPoints =
-        [
-            new RoleSpawnPoint
-        {
-            Chance = 100,
-            Role = RoleTypeId.ChaosRepressor
-        }
-        ]
+        Limit = 0
     };
     protected override void SubscribeEvents()
     {
@@ -80,7 +72,7 @@ internal class C4radio : CustomItem
         ushort radioSerial = ev.Item.Serial;
 
         if (!_c4left.ContainsKey(radioSerial)) //if radio new - create dictionary with available explosives
-            _c4left[radioSerial] = 3;
+            _c4left[radioSerial] = CFGrenade.MainPlugin.Instance.Config.AvailableCharges;
 
         if (_c4left[radioSerial] > 0) //as long as radio includes ammo
         {

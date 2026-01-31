@@ -72,7 +72,7 @@ public class ImpactDetect : MonoBehaviour
     {
         _beepLight = Light.Create(_C4schemmatic.transform.position);
         _beepLight.Color = new Color(1f, 1f, 1f); 
-        _beepLight.Range = 1.0f;   
+        _beepLight.Range = 0.5f;   
         _beepLight.Intensity = 0f;
         _beepLight.ShadowType = LightShadows.None; 
         
@@ -97,7 +97,7 @@ public class ImpactDetect : MonoBehaviour
         {
             if (_timer >= 1.9f)
             {
-                _beepLight.Intensity = 2.0f;
+                _beepLight.Intensity = 1.0f;
                 _isLightOn = true;
                 _timer = 0f;
             }

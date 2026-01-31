@@ -19,7 +19,7 @@ public class MainPlugin : Plugin<Config>
     public override string Name => "CF_Detonator";
     public override string Prefix => "CFGrenade";
     public override string Author => "JUICE";
-    public override Version Version => new(0, 4, 0);
+    public override Version Version => new(0, 5, 0);
     public string schematicName = "CFHealth";
     public override void OnEnabled()
     {
