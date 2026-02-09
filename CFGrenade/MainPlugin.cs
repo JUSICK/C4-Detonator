@@ -1,15 +1,10 @@
 ﻿using Exiled.API.Features;
-using Exiled.CreditTags;
 using Exiled.CustomItems.API.Features;
-using Exiled.Events.EventArgs.Player;
-using ProjectMER.Features;
-using ProjectMER.Features.Objects;
-using ProjectMER.Features.Serializable.Schematics;
-using SharpCompress.Common;
 using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using static CFGrenade.CustomC4grenade.DefuseManager;
 
 namespace CFGrenade;
 
@@ -19,28 +14,32 @@ public class MainPlugin : Plugin<Config>
     public override string Name => "CF_Detonator";
     public override string Prefix => "CFGrenade";
     public override string Author => "JUICE";
-    public override Version Version => new(0, 5, 0);
-    public string schematicName = "CFHealth";
+    public override Version Version => new(1, 0, 1);
     public override void OnEnabled()
     {
         CustomItem.RegisterItems(overrideClass: Config);
-        Exiled.Events.Handlers.Server.WaitingForPlayers += LoadSchematic;
+        Exiled.Events.Handlers.Server.WaitingForPlayers += LoadAllSchematic;
         Exiled.Events.Handlers.Server.WaitingForPlayers += OnPluginLoad;
         Exiled.Events.Handlers.Server.WaitingForPlayers += NotifyLog;
+        Exiled.Events.Handlers.Server.RoundStarted += ClearingDictionaries;
         Instance = this;
         base.OnEnabled();
     }
     public override void OnDisabled()
     {
         CustomItem.UnregisterItems();
-        Exiled.Events.Handlers.Server.WaitingForPlayers -= LoadSchematic;
+        Exiled.Events.Handlers.Server.WaitingForPlayers -= LoadAllSchematic;
         Exiled.Events.Handlers.Server.WaitingForPlayers -= OnPluginLoad;
         Exiled.Events.Handlers.Server.WaitingForPlayers -= NotifyLog;
+        Exiled.Events.Handlers.Server.RoundStarted -= ClearingDictionaries;
         base.OnDisabled();
         Instance = null;
     }
+
+    private void ClearingDictionaries()=> ActiveSessions.Clear();
     private void NotifyLog() => Log.Info("CFGrenade plugin was loaded successfully. Thank You!");
-    public void OnPluginLoad()
+    
+    private void OnPluginLoad()
     {
         string path1 = SetupSoundFile("beep.ogg");
         AudioClipStorage.LoadClip(path1, "beep");
@@ -51,7 +50,7 @@ public class MainPlugin : Plugin<Config>
         string path4 = SetupSoundFile("beeping.ogg");
         AudioClipStorage.LoadClip(path4, "beeping");
     }
-    public string SetupSoundFile(string filename)
+    private string SetupSoundFile(string filename)
     {
         string folderPath = Path.Combine(Paths.Plugins, "C4Sounds");
         string filePath = Path.Combine(folderPath, filename);
@@ -85,9 +84,13 @@ public class MainPlugin : Plugin<Config>
     }
 
 
+    private void LoadAllSchematic()
+    {
+        LoadSchematic("CFHealth");
+        LoadSchematic("CFHealthRad");
+    }
 
-
-    public void LoadSchematic()
+    private void LoadSchematic(string schematicName)
     {
         string specificFolder = Path.Combine(ProjectMER.ProjectMER.SchematicsDir, schematicName);
         string destinationPath = Path.Combine(specificFolder, schematicName + ".json");
@@ -119,7 +122,7 @@ public class MainPlugin : Plugin<Config>
         using (Stream stream = assembly.GetManifestResourceStream(resourceName))
         using (FileStream fileStream = new FileStream(savePath, FileMode.Create, FileAccess.Write))
         {
-            stream.CopyTo(fileStream);
+            if (stream != null) stream.CopyTo(fileStream);
         }
     }
 }

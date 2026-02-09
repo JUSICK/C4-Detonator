@@ -71,6 +71,9 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Mirror">
+      <HintPath>D:\Steam\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Mirror.dll</HintPath>
+    </Reference>
     <Reference Include="NorthwoodLib, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ExMod.Exiled.9.12.4\lib\net48\NorthwoodLib.dll</HintPath>
     </Reference>
@@ -126,6 +129,7 @@
   <ItemGroup>
     <Compile Include="CustomC4grenade\C4radio.cs" />
     <Compile Include="CustomC4grenade\CollisionDetect.cs" />
+    <Compile Include="CustomC4grenade\DefuseManager.cs" />
     <Compile Include="MainPlugin.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -144,10 +148,13 @@
     <EmbeddedResource Include="CustomC4grenade\activated.ogg" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CustomC4grenade\beeping.ogg" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="CustomC4grenade\CFHealth.json" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CustomC4grenade\beeping.ogg" />
+    <EmbeddedResource Include="CustomC4grenade\CFHealthRad.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
