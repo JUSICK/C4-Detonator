@@ -4,52 +4,65 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Collections.Generic;
+
 using static CFGrenade.CustomC4grenade.DefuseManager;
+using Server = Exiled.Events.Handlers.Server;
 
 namespace CFGrenade;
 
 public class MainPlugin : Plugin<Config>
 {
     public static MainPlugin Instance { get; private set; }
-    public override string Name => "CF_Detonator";
-    public override string Prefix => "CFGrenade";
+    public override string Name => "C4";
+    public override string Prefix => "C4";
     public override string Author => "JUICE";
-    public override Version Version => new(1, 0, 1);
+    public override Version Version => new(1, 0, 2);
     public override void OnEnabled()
     {
         CustomItem.RegisterItems(overrideClass: Config);
-        Exiled.Events.Handlers.Server.WaitingForPlayers += LoadAllSchematic;
-        Exiled.Events.Handlers.Server.WaitingForPlayers += OnPluginLoad;
-        Exiled.Events.Handlers.Server.WaitingForPlayers += NotifyLog;
-        Exiled.Events.Handlers.Server.RoundStarted += ClearingDictionaries;
+        Server.WaitingForPlayers += OnPluginLoad;
+        Server.RoundStarted += ClearingDictionaries;
         Instance = this;
         base.OnEnabled();
     }
     public override void OnDisabled()
     {
         CustomItem.UnregisterItems();
-        Exiled.Events.Handlers.Server.WaitingForPlayers -= LoadAllSchematic;
-        Exiled.Events.Handlers.Server.WaitingForPlayers -= OnPluginLoad;
-        Exiled.Events.Handlers.Server.WaitingForPlayers -= NotifyLog;
-        Exiled.Events.Handlers.Server.RoundStarted -= ClearingDictionaries;
+        Server.WaitingForPlayers -= OnPluginLoad;
+        Server.RoundStarted -= ClearingDictionaries;
         base.OnDisabled();
         Instance = null;
     }
-
-    private void ClearingDictionaries()=> ActiveSessions.Clear();
-    private void NotifyLog() => Log.Info("CFGrenade plugin was loaded successfully. Thank You!");
     
     private void OnPluginLoad()
     {
-        string path1 = SetupSoundFile("beep.ogg");
-        AudioClipStorage.LoadClip(path1, "beep");
-        string path2 = SetupSoundFile("bombCollision.ogg");
-        AudioClipStorage.LoadClip(path2, "bombCollision");
-        string path3 = SetupSoundFile("activated.ogg");
-        AudioClipStorage.LoadClip(path3, "activated");
-        string path4 = SetupSoundFile("beeping.ogg");
-        AudioClipStorage.LoadClip(path4, "beeping");
+        LoadAllSchematic();
+        LoadAllSounds();
+        NotifyLog();
     }
+    private void LoadAllSchematic()
+    {
+        LoadSchematic("CFHealth");
+        LoadSchematic("CFHealthRad");
+    }
+    private void LoadAllSounds()
+    {
+        var sounds = new Dictionary<string, string>
+        {
+            { "beep.ogg", "beep" },
+            { "bombCollision.ogg", "bombCollision" },
+            { "activated.ogg", "activated" },
+            { "beeping.ogg", "beeping" }
+        };
+        foreach (var sound in sounds)
+        {
+            string path = SetupSoundFile(sound.Key);
+            AudioClipStorage.LoadClip(path, sound.Value);
+        }
+    }
+    private void ClearingDictionaries()=> ActiveSessions.Clear();
+    private void NotifyLog() => Log.Info("C4 plugin was loaded successfully. Thank You!");
     private string SetupSoundFile(string filename)
     {
         string folderPath = Path.Combine(Paths.Plugins, "C4Sounds");
@@ -63,7 +76,7 @@ public class MainPlugin : Plugin<Config>
 
         Assembly assembly = Assembly.GetExecutingAssembly();
 
-        string resourceName = $"CFGrenade.CustomC4grenade.{filename}";
+        string resourceName = $"CFGrenade.CustomC4grenade.ogg_json.{filename}";
 
         using (Stream stream = assembly.GetManifestResourceStream(resourceName))
         {
@@ -81,13 +94,6 @@ public class MainPlugin : Plugin<Config>
 
         Log.Info($"The {filename} was created in: {filePath}");
         return filePath;
-    }
-
-
-    private void LoadAllSchematic()
-    {
-        LoadSchematic("CFHealth");
-        LoadSchematic("CFHealthRad");
     }
 
     private void LoadSchematic(string schematicName)

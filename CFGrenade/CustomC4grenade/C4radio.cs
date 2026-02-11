@@ -9,12 +9,12 @@ using Exiled.Events.EventArgs.Player;
 using ProjectMER.Features;
 using ProjectMER.Features.Objects;
 using ProjectMER.Features.Serializable.Schematics;
-using System;
-using MEC;
 using System.Collections.Generic;
 using Exiled.Events.EventArgs.Map;
 using UnityEngine;
 
+using Player = Exiled.Events.Handlers.Player;
+using Server = Exiled.Events.Handlers.Server;
 namespace С4grenade.CustomC4grenade;
 
 [CustomItem(ItemType.Radio)]
@@ -24,7 +24,7 @@ internal class C4Radio : CustomItem
     public override string Name { get; set; } = "<i><color=black>Набір Підривника</i></color>";
     public override string Description { get; set; } = "<size=0>...</size=0>";
     public override ItemType Type { get; set; } = ItemType.Radio;
-    public override float Weight { get; set; } = 5f;
+    public override float Weight { get; set; } = 7f;
     public override SpawnProperties SpawnProperties { get; set; } = new()
     {
         Limit = 1,
@@ -55,9 +55,9 @@ internal class C4Radio : CustomItem
     {
         Exiled.Events.Handlers.Map.PickupAdded += OnPickUpAdded;
         
-        Exiled.Events.Handlers.Player.DroppingItem += OnPlayerDropping;
-        Exiled.Events.Handlers.Server.WaitingForPlayers += OnCleaning;
-        Exiled.Events.Handlers.Player.ChangingRadioPreset += OnChangingRadioPreset;
+        Player.DroppingItem += OnPlayerDropping;
+        Server.WaitingForPlayers += OnCleaning;
+        Player.ChangingRadioPreset += OnChangingRadioPreset;
 
         base.SubscribeEvents();
     }
@@ -65,9 +65,9 @@ internal class C4Radio : CustomItem
     {
         Exiled.Events.Handlers.Map.PickupAdded -= OnPickUpAdded;
         
-        Exiled.Events.Handlers.Player.DroppingItem -= OnPlayerDropping;
-        Exiled.Events.Handlers.Server.WaitingForPlayers -= OnCleaning;
-        Exiled.Events.Handlers.Player.ChangingRadioPreset -= OnChangingRadioPreset;
+        Player.DroppingItem -= OnPlayerDropping;
+        Server.WaitingForPlayers -= OnCleaning;
+        Player.ChangingRadioPreset -= OnChangingRadioPreset;
         base.UnsubscribeEvents();
     }
     

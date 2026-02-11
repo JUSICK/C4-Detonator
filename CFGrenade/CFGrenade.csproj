@@ -135,26 +135,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CustomC4grenade\beep.ogg" />
+    <EmbeddedResource Include="CustomC4grenade\ogg_json\activated.ogg" />
+    <EmbeddedResource Include="CustomC4grenade\ogg_json\beep.ogg" />
+    <EmbeddedResource Include="CustomC4grenade\ogg_json\beeping.ogg" />
+    <EmbeddedResource Include="CustomC4grenade\ogg_json\bombCollision.ogg" />
+    <EmbeddedResource Include="CustomC4grenade\ogg_json\CFHealth.json" />
+    <EmbeddedResource Include="CustomC4grenade\ogg_json\CFHealthRad.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="CustomC4grenade\bombCollision.ogg" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="CustomC4grenade\activated.ogg" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="CustomC4grenade\beeping.ogg" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="CustomC4grenade\CFHealth.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="CustomC4grenade\CFHealthRad.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
