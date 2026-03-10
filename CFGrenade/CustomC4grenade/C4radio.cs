@@ -130,6 +130,7 @@ internal class C4Radio : CustomItem
                 Quaternion.identity,
                 Vector3.one
             );
+            
             if (schematic == null) 
             {
                 Log.Error("C4 schematic == null");
@@ -143,7 +144,7 @@ internal class C4Radio : CustomItem
 
             ImpactDetect customScript = timeGrenade.GameObject.AddComponent<ImpactDetect>();
             customScript.Init(timeGrenade, schematic, radioSerial);
-                
+            
             if (!Detonators.ContainsKey(radioSerial))
                 Detonators[radioSerial] = null;
             Detonators[radioSerial] += customScript.Detonate;

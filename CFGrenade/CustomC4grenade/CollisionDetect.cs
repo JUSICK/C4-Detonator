@@ -1,10 +1,13 @@
 ﻿
 using System.Collections.Generic;
+using CFGrenade.CustomC4grenade;
+using Exiled.API.Features;
 using UnityEngine;
 using ProjectMER.Features.Objects;
 using MEC;
 using UnityEngine.Serialization;
 using Light = Exiled.API.Features.Toys.Light;
+using LabApi.Features.Wrappers;
 
 namespace С4grenade.CustomC4grenade;
 
@@ -16,6 +19,7 @@ public class ImpactDetect : MonoBehaviour
     
     private CoroutineHandle _blinkCoroutine;
     private Exiled.API.Features.Toys.Light _beepLight;
+    private LabApi.Features.Wrappers.InteractableToy _iToy;
     
     private ushort _radioSerial;
     [FormerlySerializedAs("IsDefusalLocked")] public bool isDefusalLocked = false;
@@ -42,6 +46,8 @@ public class ImpactDetect : MonoBehaviour
             
             _beepLight.Transform.SetParent(c4Schematic.transform); 
         }
+        
+       
     }
 
     public void Detonate()
@@ -49,8 +55,8 @@ public class ImpactDetect : MonoBehaviour
         if (_projectile == null) return;
         if (_projectile.GameObject == null) return;
         CreateForObject(_projectile.GameObject, "beep", 3f);
-
-        KillBlink();
+        UnsubscribeFromC4();
+        
         _projectile.FuseTime = 2f;
         if (c4Schematic != null) Destroy(c4Schematic, 3f);
         if (_beepLight != null) _beepLight.Destroy();
@@ -62,8 +68,7 @@ public class ImpactDetect : MonoBehaviour
         if (_projectile.GameObject == null) return;
         UnsubscribeFromRadio();
         CreateForObject(_projectile.GameObject, "beep", 3f);
-
-        KillBlink();
+        
         Destroy(_projectile.GameObject, 2f);
         if (c4Schematic != null) Destroy(c4Schematic, 3f);
         if (_beepLight != null) _beepLight.Destroy();
@@ -95,6 +100,24 @@ public class ImpactDetect : MonoBehaviour
         }
         c4Schematic.gameObject.layer = 0;
     }
+
+    private void SpawnInteractableToy()
+    {
+        if (_iToy != null)
+        {
+            _iToy.Destroy();
+            _iToy = null;
+        }
+        var itoy = InteractableToy.Create(_projectile.Transform, true);
+        Log.Info(itoy.CanSearch); // false
+        itoy.InteractionDuration = 3f;
+        Log.Info(itoy.CanSearch); // true
+        itoy.OnInteracted += p => Log.Info($"{p.Nickname} interatcted"); // Runs if interactionduration is set to 0
+        itoy.OnSearching += p => Log.Info($"{p.Nickname} OnSearching"); // runs when the player presses E & interactionduration != 0
+        itoy.OnSearched += p => Log.Info($"{p.Nickname} OnSearched"); // Runs after searching is completed.
+        itoy.OnSearchAborted += p => Log.Info($"{p.Nickname} OnSearchAborted"); // Runs after searched is completed. Does not run when player refuses to complete.
+        itoy.Spawn();
+    }
     private void SpawnBlinkingLight()
     {
         if (_beepLight != null) 
@@ -111,7 +134,8 @@ public class ImpactDetect : MonoBehaviour
         _beepLight.Transform.SetParent(c4Schematic.transform);
         _beepLight.Transform.localPosition = new Vector3(0, 0, 0); 
         
-        _blinkCoroutine = Timing.RunCoroutine(BlinkSequence());
+        Timing.RunCoroutine(BlinkSequence().CancelWith(this.gameObject));
+        
     }
     private IEnumerator<float> BlinkSequence()
     {
@@ -129,15 +153,29 @@ public class ImpactDetect : MonoBehaviour
     private void OnDestroy()
     {
         UnsubscribeFromRadio();
-        KillBlink();
         if (c4Schematic != null) Destroy(c4Schematic);
         if (_beepLight != null) _beepLight.Destroy();
     }
-    private void KillBlink() => Timing.KillCoroutines(_blinkCoroutine);
+
     private void UnsubscribeFromRadio()
     {
         if (!C4Radio.Detonators.ContainsKey(_radioSerial)) return;
             C4Radio.Detonators[_radioSerial] -= Detonate;
+    }
+    private void UnsubscribeFromC4()
+    {
+        Exiled.API.Features.Player playerToClear = null;
+        foreach (var session in DefuseManager.ActiveSessions)
+        {
+            if (session.Value.c4 == this)
+            {
+                playerToClear = session.Key;
+                break;
+            }
+        }
+        if (playerToClear != null) 
+            DefuseManager.ActiveSessions.Remove(playerToClear);
+        
     }
 }
 

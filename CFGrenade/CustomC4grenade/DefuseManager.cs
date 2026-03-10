@@ -33,7 +33,7 @@ public static class DefuseManager
     {
         public string Command { get; } = "defusec4";
         public string[] Aliases { get; } = Array.Empty<string>();
-        public string Description { get; } = "Команда для знешкодження С4. Використання: '.defusec4' (сканування), '.defusec4 [число]' (введення коду), '.defusec4 cancel' (скидання сесії). Для деактивації потрібно ввести суму цифр отриманого коду";
+        public string Description { get; } = "Command to defuse C4. Usage: '.defusec4' (scan), '.defusec4 [number]' (enter code), '.defusec4 cancel' (reset session). To deactivate, you must enter the sum of the digits of the received code.";
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
@@ -51,21 +51,21 @@ public static class DefuseManager
                 {
                     if (DefuseManager.ActiveSessions.Remove(player))
                     {
-                        response = "Пристрій знешкодження успішно відключено. Систему перезавантажено, готово до роботи.";
+                        response = "Defusal device successfully disconnected. System rebooted, ready to use.";
                     }
 
-                    response = "Пристрій наразі не підключений до жодної вибухівки.";
+                    response = "The device is not currently connected to any explosives.";
                     return false;
                 }
                 if (!int.TryParse(arguments.At(0), out int playerAnswer))
                 {
-                    response = "Помилка використання. Доступні варіації команди: 'defuse', 'defuse [сума]' або 'defuse cancel'.";
+                    response = "Usage error. Available command variations: 'defuse', 'defuse [sum]' or 'defuse cancel'.";
                     return false;
                 }
 
                 if (!DefuseManager.ActiveSessions.TryGetValue(player, out var session))
                 {
-                    response = "Пристрій ще не просканував заряд! Спочатку використайте команду 'defuse', щоб отримати код.";
+                    response = "The device has not scanned the charge yet! First, use the 'defuse' command to obtain the code.";
                     return false;
                 }
 
@@ -74,19 +74,19 @@ public static class DefuseManager
                 if (c4 == null)
                 {
                     DefuseManager.ActiveSessions.Remove(player);
-                    response = "ПОМИЛКА: Зв’язок із зарядом втрачено. Вибухівку не знайдено.";
+                    response = "ERROR: Connection to the charge lost. No explosives found.";
                     return false;
                 }
                 
                 if (Vector3.Distance(player.Position, c4.transform.position) > 5.0f)
                 {
-                    response = "ПОМИЛКА: Сигнал надто слабкий. Ви знаходитесь задалеко від С4!";
+                    response = "ERROR: Signal too weak. You are too far from the C4!";
                     return false;
                 }
                 
                 if (c4.isDefusalLocked)
                 {
-                    response = "ПОМИЛКА: Деактивація неможлива. Протокол захисту заблокував доступ після невдалої спроби.";
+                    response = "ERROR: Deactivation impossible. Security protocol has blocked access after a failed attempt.";
                     return false;
                 }
                 
@@ -94,14 +94,14 @@ public static class DefuseManager
                 {
                     c4.Defuse();
                     DefuseManager.ActiveSessions.Remove(player);
-                    response = "Вибухівку успішно знешкоджено! Заряд деактивовано.";
+                    response = "Explosives successfully defused! Charge deactivated.";
                     return true;
                 }
                 else
                 {
                     c4.isDefusalLocked = true;
                     DefuseManager.ActiveSessions.Remove(player);
-                    response = "Помилка деактивації! Введено невірний код. Захисний протокол заблокував можливість подальшого втручання.";
+                    response = "Deactivation error! Incorrect code entered. Security protocol has blocked any further interference.";
                     return false;
                 }
             }
@@ -114,7 +114,7 @@ public static class DefuseManager
                     
                     if (c4Script.isDefusalLocked)
                     {
-                        response = "ПОМИЛКА: Неможливо підключитися. На пристрої активовано систему захисту від зламу.";
+                        response = "ERROR: Unable to connect. The device's anti-tamper security system is active.";
                         return false;
                     }
 
@@ -122,19 +122,19 @@ public static class DefuseManager
                     {
                         if (currentSession.c4 == c4Script)
                         {
-                            response = $"З’єднання вже встановлено. Поточна комбінація: {currentSession.codeString}.";
+                            response = $"Connection already established. Current combination: {currentSession.codeString}";
                             return false;
                         }
 
-                        response = "Знайдено інший пристрій. Для перепідключення спочатку скасуйте поточну сесію: '.defusec4 cancel'";
+                        response = "Another device found. To reconnect, first cancel the current session: '.defusec4 cancel'";
                         return false;
                     }
                     DefuseManager.ActivateSession(player, c4Script, out string generatedCode);
-                    response = $"УСПІХ: З’єднання встановлено. Отримано дану комбінацію: {generatedCode}. (Введіть суму цифр для деактивації).";
+                    response = $"SUCCESS: Connection established. Received the following combination: {generatedCode}. (Enter the sum of the digits to deactivate).";
                     return true;
                 }
             }
-            response = "У радіусі дії не виявлено жодного вибухового пристрою.";
+            response = "No explosive devices detected within range.";
             return false;
         }
     }
