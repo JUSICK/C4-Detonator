@@ -17,7 +17,7 @@ public class MainPlugin : Plugin<Config>
     public override string Name => "C4";
     public override string Prefix => "C4";
     public override string Author => "JUICE";
-    public override Version Version => new(1, 0, 2);
+    public override Version Version => new(1, 3, 2);
     public override void OnEnabled()
     {
         CustomItem.RegisterItems(overrideClass: Config);

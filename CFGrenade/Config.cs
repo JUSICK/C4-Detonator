@@ -9,7 +9,7 @@ namespace CFGrenade
         
         [Description("Скільки зарядів С4 матиме гравець?")]
         public int AvailableCharges { get; set; } = 3;
-        [Description("Скільки цифр в комбінації гравець має порахувати для деактивації заряду? Рекомендовано: 10")]
+        [Description("How many 'levels' of defense does the c4 have? For RP: 10; For Yamato: 2")]
         public int DigitsToSum { get; set; } = 10;
     }
 }
