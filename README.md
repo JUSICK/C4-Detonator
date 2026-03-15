@@ -3,7 +3,7 @@
 
 # 💣 C4 Detonator (SCP:SL Plugin)
 
-An interactive Custom Item plugin for SCP: Secret Laboratory (using the EXILED framework) that introduces remote-detonated C4 explosives and a high-stakes defusal mini-game.
+An interactive Custom Item plugin for SCP: Secret Laboratory that introduces remote-detonated C4 explosives and a high-stakes defusal mini-game for RP.
 
 ## ✨ Features
 
