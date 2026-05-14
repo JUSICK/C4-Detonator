@@ -1,4 +1,4 @@
-
+[![Watch the video](https://img.youtube.com/vi/p0unfMFHtQo/maxresdefault.jpg)](https://youtu.be/p0unfMFHtQo)
 ---
 
 # 💣 C4 Detonator (SCP:SL Plugin)
